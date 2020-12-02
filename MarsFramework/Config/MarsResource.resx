@@ -122,19 +122,19 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>D:\\ic test\\MarsCompetition\\MarsProject\\ProjectMarsFramework\\ProjectMarsFramework\\MarsFramework\\ExcelData\\TestData.xlsx</value>
+    <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\ExcelData\\TestData.xlsx</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>D:\\ic test\\MarsCompetition\\MarsProject\\ProjectMarsFramework\\ProjectMarsFramework\\MarsFramework\\TestReports\\MarsReports.html</value>
+    <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\TestReports\\MarsReports.html</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>D:\\ic test\\MarsCompetition\\MarsProject\\ProjectMarsFramework\\ProjectMarsFramework\\MarsFramework\\Config\\XMLFile.xml</value>
+    <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\Config\\XMLFile.xml</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>D:\\ic test\\MarsCompetition\\MarsProject\\ProjectMarsFramework\\ProjectMarsFramework\\MarsFramework\\TestReports\\Screenshots\\AnuScreenShots\\</value>
+    <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\TestReports\\Screenshots\\AnuScreenShots\\</value>
   </data>
 </root>

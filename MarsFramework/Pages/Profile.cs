@@ -31,7 +31,12 @@ namespace MarsFramework
         [FindsBy(How = How.XPath, Using = "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[2]/div/div/div/div/div/div[3]/div/div[3]/div/span/i")]
         private IWebElement HourEdit { get; set; }
 
-      
+        internal void ChangePassword()
+        {
+            throw new NotImplementedException();
+        }
+
+
         //Click on Availability hour dropdown
         [FindsBy(How = How.Name, Using = "availabiltyHour")]
         private IWebElement AvailabilityHour { get; set; }
@@ -512,11 +517,12 @@ namespace MarsFramework
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowLanguageLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowLanguageLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "LanguageLevel")));
-
+                Base.test.Log(LogStatus.Pass, "Language Passed");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Language", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Failed to add language");
             }
 
             //verify skill
@@ -538,11 +544,13 @@ namespace MarsFramework
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowSkillLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowSkillLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "SkillLevel")));
+                Base.test.Log(LogStatus.Pass, "Skill Added");
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Skills", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Skill is not Addedd");
             }
 
             //verify education
@@ -576,11 +584,13 @@ namespace MarsFramework
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]", 10000);
                 var lastRowEducationGraduationYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]")).Text;
                 Assert.That(lastRowEducationGraduationYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "YearOfGraduation")));
+                Base.test.Log(LogStatus.Pass, "Education Added");
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Education", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Education is not added");
             }
 
             //verify certification
@@ -606,11 +616,13 @@ namespace MarsFramework
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowCertificateYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowCertificateYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "YearOfCertification")));
+                Base.test.Log(LogStatus.Pass, "Certification added");
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Certification", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Certification adding failed");
             }
 
             //Verify Description
@@ -619,406 +631,20 @@ namespace MarsFramework
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span", 10000);
                 var description = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span")).Text;
                 Assert.That(description, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "Description")));
+                Base.test.Log(LogStatus.Pass, "Description Added");
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Description", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Description Addeing failed");
+
             }
             #endregion
 
 
         }
 
-        //Edit Profile
-        internal void EditProfile()
-        {
-            // Populate data saved in Excel
-            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
-
-            // Refresh the page
-            GlobalDefinitions.driver.Navigate().Refresh();
-
-            #region Edit profile
-            //Edit hours
-            try
-            {
-
-                //click on hour edit
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[2]/div/div/div/div/div/div[3]/div/div[3]/div/span/i", 10000);
-                HourEdit.Click();
-
-                //click on houredit dropdown
-                AvailabilityHour.Click();
-
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "availabiltyHour", 10000);
-                //select availability hour
-                new SelectElement(AvailabilityHour).SelectByText(GlobalDefinitions.ExcelLib.ReadData(3, "Hours"));
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to edit Availability Hours", ex.Message);
-            }
-
-            //Edit language
-            try
-            {
-                //Click on language
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
-                LangBtn.Click();
-
-                //Click on language to edit
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                LangToSel.Click();
-
-                //Click on edit language button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i", 10000);
-                EditLangBtn.Click();
-
-                //Update the language
-                //Update language level
-                ChooseLevel.Click();
-                new SelectElement(ChooseLevel).SelectByText(GlobalDefinitions.ExcelLib.ReadData(3, "LanguageLevel"));
-
-                //Click on update
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]", 10000);
-                UpdateLangBtn.Click();
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to edit Language", ex.Message);
-            }
-
-            //Edit Skill
-            try
-            {
-                //Click on skill
-                //Click on skill
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 10000);
-                SkillBtn.Click();
-
-                //Click on skill to be edited
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                SkillToSel.Click();
-
-                //Click on Edit skill
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i", 10000);
-                EditSkill.Click();
-
-                //Edit the skill
-                //Add skill level
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "level", 10000);
-                AddSkillLevel.Click();
-                new SelectElement(AddSkillLevel).SelectByText(GlobalDefinitions.ExcelLib.ReadData(3, "SkillLevel"));
-
-                //Click on update
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10000);
-                UpdateSkillBtn.Click();
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to edit Skill", ex.Message);
-            }
-
-               //Edit Education
-
-            try
-            {
-                //Click on education
-                //Click on Education button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
-                EducationBtn.Click();
-
-                //Click on education to be edit
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                EduToSel.Click();
-
-                //Click on edit education button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[1]/i", 10000);
-                EditEduBtn.Click();
-
-                //Update education
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "title", 10000);
-                SelectTitle.Click();
-                new SelectElement(SelectTitle).SelectByText(GlobalDefinitions.ExcelLib.ReadData(3, "Title"));
-
-                //Click on update education button 
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody/tr/td/div[3]/input[1]", 10000);
-            
-                UpdateEduBtn.Click();
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to edit Education", ex.Message);
-            }
-
-            //Edit certification
-            try
-            {
-                //Click on certification
-                //Click on Certifications
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
-                CertificationBtn.Click();
-
-                //Click on certification to be edit
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                CertiToSel.Click();
-
-                //Click on edit certification button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[4]/span[1]/i", 10000);
-                EditCertiBtn.Click();
-
-                //Update certification
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "certificationYear", 10000);
-                CertiYear.Click();
-                new SelectElement(CertiYear).SelectByText(GlobalDefinitions.ExcelLib.ReadData(3, "YearOfCertification")); ;
-
-                //Click on update certification button            
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10000);
-                UpdateCertiBtn.Click();
-            }
-
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to edit Certification", ex.Message);
-            }
-
-            //Edit Description
-            try
-            {
-                //Click on edit Description
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/h3/span/i", 10000);
-                DescriptionEdit.Click();
-
-                //Click on Description Text and clear the details
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/form/div/div/div[2]/div[1]/textarea", 10000);
-                Thread.Sleep(1000);
-                DescriptionBox.Clear();
-                DescriptionBox.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Description"));
-
-                //Click on Save button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/form/div/div/div[2]/button", 10000);
-                SaveDescription.Click();
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to Edit Description", ex.Message);
-            }
-            #endregion
-
-        }
-
-
-        //Verify edited profile
-        internal void VerifyEditedProfile()
-        {
-            // Populate data saved in Excel
-            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
-
-            // Refresh the page
-            GlobalDefinitions.driver.Navigate().Refresh();
-
-            #region verify edited profile details
-            //verify updated language
-            try
-            {
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
-                LangBtn.Click();
-                //Verify Language Level
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
-                var lastRowLanguageLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
-                Assert.That(lastRowLanguageLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "LanguageLevel")));
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to update Language", ex.Message);
-            }
-
-            //Verify updated skill
-            try
-            {
-
-                //Jump to Skill tab
-
-                //Click on skill
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 10000);
-                SkillBtn.Click();
-
-                //Verify Skill Level
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
-                var lastRowSkillLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
-                Assert.That(lastRowSkillLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "SkillLevel")));
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to verify updated Skills", ex.Message);
-            }
-
-
-
-            //verify updated education
-            try
-            {
-                //Jump to Education tab
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
-                EducationBtn.Click();
-
-                //Verify Education Title
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
-                var lastRowEducationTitle = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
-                Assert.That(lastRowEducationTitle, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "Title")));
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to verify Updating Education", ex.Message);
-            }
-
-            //verify updated certification
-            //verify certification
-            try
-            {
-
-                //Jump to Certification tab
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
-                CertificationBtn.Click();
-
-                //Verify Certificate Year
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
-                var lastRowCertificateYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
-                Assert.That(lastRowCertificateYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "YearOfCertification")));
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to verify Entering Certification", ex.Message);
-            }
-
-            //Verify edited description
-            try
-            {
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span", 10000);
-                var description = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span")).Text;
-                Assert.That(description, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "Description")));
-
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Test failed to verify Entering Description", ex.Message);
-            }
-            #endregion
-
-        }
-
-
-
-        //Delete Profile Details
-        internal void DeleteProfile()
-        {
-
-
-               // Populate data saved in Excel
-               GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
-
-               // Refresh the page
-               GlobalDefinitions.driver.Navigate().Refresh();
-               #region Delete profile details
-
-                //Delete Language
-            
-               try
-               {
-                 //Click on language
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
-                 LangBtn.Click();
-
-                 //Click on language to delete
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                 LangToSel.Click();
-
-                 //Click on delete language
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
-                 DeleteLangBtn.Click();
-               }
-               catch (Exception ex)
-               {
-                 Assert.Fail("Test failed to delete Language", ex.Message);
-               }
-
-               //Delete Skill
-            
-               try
-               {
-                
-                 //Click on skill
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 10000);
-                 SkillBtn.Click();
-
-                 //Click on skill to be deleted
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                 SkillToSel.Click();
-
-                 //Click on Delete skill
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
-                 DeleteSkillBtn.Click();
-               
-               }
-               catch (Exception ex)
-               {
-                 Assert.Fail("Test failed to Delete Skill", ex.Message);
-               }
-                  Thread.Sleep(1000);
-
-                //Delete Education
-                try
-                {
-                  //Click on education
-                  //Click on Education button
-                  GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
-                  EducationBtn.Click();
-
-                   //Click on education to be deleted
-                   GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                   EduToSel.Click();
-
-                   //Click on  delete education button
-                   GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[2]/i", 20000);
-                   DeleteEduBtn.Click();
-
-               
-                }
-                catch (Exception ex)
-                {
-                  Assert.Fail("Test failed to delete Education", ex.Message);
-                }
-
-               //Delete Certification
-            
-               try
-               {
-                 //Click on certification
-                 //Click on Certifications
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
-                 CertificationBtn.Click();
-
-                 //Click on certification to be deleted
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[1]", 10000);
-                 CertiToSel.Click();
-
-                 //Click on delete certification button
-                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[4]/span[2]", 20000);
-                 DeleteCertiBtn.Click();
-
-               }
-
-                catch (Exception ex)
-               {
-                Assert.Fail("Test failed to delete Certification", ex.Message);
-               }
-                #endregion
-        }
+      
     }
 }

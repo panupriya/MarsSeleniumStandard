@@ -13,7 +13,7 @@ namespace MarsFramework
             #region Profile page
 
             [Test, Description("Check if the user is able to add profile details successfully")]
-                public void AddProfile()
+                public void EnterProfile()
                 {
                     //Create Extent Report
                     test = extent.StartTest("Add Profile");
@@ -24,30 +24,18 @@ namespace MarsFramework
 
                 }
 
-                [Test, Description("Check if the user is able to Edit profile details successfully")]
-                public void EditProfile()
+                [Test, Description("Check if the user is able to change password successfully")]
+                public void ChangePassword()
                 {
                     //Create Extent Report
-                     test = extent.StartTest("Edit Profile");
+                     test = extent.StartTest("Change Password");
                     //Edit profile
                     Profile profileobj = new Profile();
-                    profileobj.EditProfile();
-                    profileobj.VerifyEditedProfile();
-
-                }
-
-                [Test, Description("Check if the user is able to Delete profile details successfully")]
-                public void DeleteProfile()
-                {
-                    //Create Extent Report
-                    test = extent.StartTest("Delete Profile");
-                    //Delete profile
-                    Profile profileobj = new Profile();
-                    profileobj.DeleteProfile();
+                    profileobj.ChangePassword();
                    
 
                 }
-
+               
             #endregion
 
 
@@ -67,7 +55,7 @@ namespace MarsFramework
 
             #region Manage Listing page
             [Test, Description("Check if the user is able to View ManageListing successfully")]
-                public void ManageListing()
+                public void ViewManageListing()
                 {
                     //Create Extent Report
                     test = extent.StartTest("View Manage Listing");

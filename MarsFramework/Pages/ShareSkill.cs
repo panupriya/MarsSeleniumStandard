@@ -42,15 +42,25 @@ namespace MarsFramework.Pages
         //Select the Service type
         [FindsBy(How = How.XPath, Using = "//form/div[5]/div[@class='twelve wide column']/div/div[@class='field']")]
         private IWebElement ServiceTypeOptions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[5]/div[2]/div[1]/div[1]/div/input")]
+        private IWebElement ServicetypeHourly { get; set; }
+
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[5]/div[2]/div[1]/div[2]/div/input")]
-        private IWebElement Servicetyp { get; set; }
+        private IWebElement ServicetypeOneOff { get; set; }
        
         //Select the Location Type
         [FindsBy(How = How.XPath, Using = "//form/div[6]/div[@class='twelve wide column']/div/div[@class = 'field']")]
         private IWebElement LocationTypeOption { get; set; }
 
+        //Select Onsite
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[6]/div[2]/div/div[1]/div/input")]
-        private IWebElement LocationSel { get; set; }
+        private IWebElement LocationSelOnsite { get; set; }
+
+        //Select Online
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[6]/div[2]/div/div[2]/div/input")]
+        private IWebElement LocationSelOnline { get; set; }
+
 
 
         //Click on Start Date dropdown
@@ -91,6 +101,16 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/div/div/div/input")]
         private IWebElement SkillExchange { get; set; }
 
+        //Select credit otion
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[2]/div/div[2]/div/input")]
+        private IWebElement CreditBtn { get; set; }
+
+        //Add credit amount
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/input")]
+        private IWebElement CreditAmount { get; set; }
+
+
+
         //Click on Active/Hidden option
         [FindsBy(How = How.XPath, Using = "//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']")]
         private IWebElement ActiveOption { get; set; }
@@ -101,6 +121,10 @@ namespace MarsFramework.Pages
         //Click on Save button
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
         private IWebElement Save { get; set; }
+
+        //Click on Cancel button
+        [FindsBy(How = How.XPath, Using = "//input[@value='Cancel']")]
+        private IWebElement Cancel { get; set; }
 
         //Validate share skill details
         //Click on manage listing
@@ -119,23 +143,29 @@ namespace MarsFramework.Pages
             
             try
             {
-
+                #region Navigate to Share Skills Page
                 //Click on Share skill button
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "LinkText", "Share Skill", 10000);
                 ShareSkillButton.Click();
+                #endregion
 
+                #region Enter Title 
                 //Enter the Title in textbox
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "title", 10000);
                 Title.Click();
                 Title.Clear();
                 Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
+                #endregion
 
+                #region Enter Description
                 //Enter the Description in textbox
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "description", 10000);
                 Description.Click();
                 Description.Clear();
                 Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Description"));
+                #endregion
 
+                #region Category Drop Down
                 //Select catagory from drop down
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "categoryId", 10000);
                 CategoryDropDown.Click();
@@ -145,24 +175,52 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "Name", "subcategoryId", 10000);
                 SubCategoryDropDown.Click();
                 new SelectElement(SubCategoryDropDown).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "SubCategory"));
+                #endregion
 
+                #region Tags
                 //Enter Tag names in textbox
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//input[@value='']", 10000);
                 Tags.Click();
                 Tags.Clear();
                 Tags.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Tags"));
                 Tags.SendKeys(Keys.Enter);
+                #endregion
 
+                #region Service Type Selection
                 //Select service type
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[5]/div[@class='twelve wide column']/div/div[@class='field']", 10000);
-                ServiceTypeOptions.Click();
-                Servicetyp.Click();
+                if (GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType") == "Hourly basis service")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[5]/div[@class='twelve wide column']/div/div[@class='field']", 10000);
+                    ServiceTypeOptions.Click();
+                    ServicetypeHourly.Click();
+                }
+                else if (GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType") == "One-off service")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[5]/div[@class='twelve wide column']/div/div[@class='field']", 10000);
+                    ServiceTypeOptions.Click();
+                    ServicetypeOneOff.Click();
+                }
+                #endregion
 
+                #region Select Location Type
                 //Select the Location Type
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[6]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
-                LocationTypeOption.Click();
-                LocationSel.Click();
+                if (GlobalDefinitions.ExcelLib.ReadData(2, "LocationType") == "On-site")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[6]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
+                    LocationTypeOption.Click();
+                    LocationSelOnsite.Click();
+                }
+                else if (GlobalDefinitions.ExcelLib.ReadData(2, "LocationType") == "Online")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[6]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
+                    LocationTypeOption.Click();
+                    LocationSelOnline.Click();
+                }
 
+                #endregion
+
+
+                #region Select Available Dates from Calendar
                 //Add start date
                 StartDateDropDown.Click();
                 // StartDateDropDown.Clear();
@@ -197,25 +255,83 @@ namespace MarsFramework.Pages
                 EndTimeDropDown.Click();
                 //EndTimeDropDown.Clear();
                 EndTimeDropDown.SendKeys("05:00 PM");// (GlobalDefinitions.ExcelLib.ReadData(2, "Endtime"));
+                #endregion
 
+                #region Select Skill Trade
                 //Click on Skill trade option
-                SkillTradeOption.Click();
 
-                //Add Skill exchange tag
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/div/div/div/input", 10000);
-                SkillExchange.Click();
-                SkillExchange.Clear();
-                SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange"));
-                SkillExchange.SendKeys(Keys.Enter);
+                if (GlobalDefinitions.ExcelLib.ReadData(2, "SkillTrade") == "Skill-Exchange")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[8]/div[@class='twelve wide column']/div/div[@class='field']", 10000);
+                    SkillTradeOption.Click();
 
+                    //Add Skill exchange tag
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/div/div/div/input", 10000);
+                    SkillExchange.Click();
+                    SkillExchange.Clear();
+                    SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange"));
+                    SkillExchange.SendKeys(Keys.Enter);
+                   
+
+                }
+                else if (GlobalDefinitions.ExcelLib.ReadData(2, "SkillTrade") == "Credit")
+                {
+
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[8]/div[@class='twelve wide column']/div/div[@class='field']", 10000);
+                    SkillTradeOption.Click();
+                    CreditBtn.Click();
+
+                    //Addcredit amount
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/input", 10000);
+                    CreditAmount.Click();
+                    CreditAmount.Clear();
+                    CreditAmount.SendKeys(Global.GlobalDefinitions.ExcelLib.ReadData(2, "AmountInExchange"));
+                    CreditAmount.SendKeys(Keys.Enter);
+                }
+
+                #endregion
+
+                #region Select User Status
                 //Select option Active or Hidden
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
-                ActiveOption.Click();
-                HiddenOpt.Click();
+                if (GlobalDefinitions.ExcelLib.ReadData(2, "UserStatus") == "Active")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
+                    ActiveOption.Click();
+                }
+                else if (GlobalDefinitions.ExcelLib.ReadData(2, "UserStatus") == "Hidden")
+                {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']", 10000);
+                    ActiveOption.Click();
+                    HiddenOpt.Click();
+                }
+                #endregion
 
-                //Click on save button
-                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//input[@value='Save']", 10000);
-                Save.Click();
+
+                #region Add Work Sample
+
+                ////Work Sample upload button path
+                //IWebElement upload = _driver.FindElement(By.XPath("//*[@id='selectFile']"));
+
+                //// Uploading File path
+                //var GetCurrentDirectory = Directory.GetCurrentDirectory();
+                //String path = GetCurrentDirectory + @"\MarsFramework\Upload Files\Samplework.txt";
+                //upload.SendKeys(path);
+
+                #endregion
+
+
+                #region Save / Cancel Skill
+                // Save or Cancel New Skill
+
+                if (Global.GlobalDefinitions.ExcelLib.ReadData(2, "SaveOrCancel") == "Save")
+                {
+                    Save.Click();
+                }
+                else if (Global.GlobalDefinitions.ExcelLib.ReadData(2, "SaveOrCancel") == "Cancel")
+                {
+                    Cancel.Click();
+                }
+                #endregion
             }
 
             catch (Exception ex)
