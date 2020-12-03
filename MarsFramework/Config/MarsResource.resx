@@ -134,6 +134,9 @@
   <data name="ReportXMLPath" xml:space="preserve">
     <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\Config\\XMLFile.xml</value>
   </data>
+  <data name="SampleWorkPath" xml:space="preserve">
+    <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\UploadFile\\SampleWork.txt</value>
+  </data>
   <data name="ScreenShotPath" xml:space="preserve">
     <value>D:\\ic test\\MarsAdvanced\\MarsSeleniumTask\\MarsSelenium\\MarsFramework\\TestReports\\Screenshots\\AnuScreenShots\\</value>
   </data>

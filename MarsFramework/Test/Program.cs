@@ -12,17 +12,17 @@ namespace MarsFramework
 
             #region Profile page
 
-            [Test, Description("Check if the user is able to add profile details successfully")]
-                public void EnterProfile()
-                {
-                    //Create Extent Report
-                    test = extent.StartTest("Add Profile");
-                    //Add profile
-                    Profile profileobj = new Profile();
-                    profileobj.EnterProfile();
-                    profileobj.VerifyProfile();
+            //[Test, Description("Check if the user is able to add profile details successfully")]
+            //    public void EnterProfile()
+            //    {
+            //        //Create Extent Report
+            //        test = extent.StartTest("Add Profile");
+            //        //Add profile
+            //        Profile profileobj = new Profile();
+            //        profileobj.EnterProfile();
+            //        profileobj.VerifyProfile();
 
-                }
+            //    }
 
                 [Test, Description("Check if the user is able to change password successfully")]
                 public void ChangePassword()

@@ -125,13 +125,38 @@
     </Compile>
     <Compile Include="Global\Base.cs" />
     <Compile Include="Global\GlobalDefinitions.cs" />
+    <Compile Include="Pages\Certification.cs" />
+    <Compile Include="Pages\Change_Password.cs" />
+    <Compile Include="Pages\Chat.cs" />
+    <Compile Include="Pages\Description.cs" />
+    <Compile Include="Pages\Education.cs" />
+    <Compile Include="Pages\Language.cs" />
+    <Compile Include="Pages\Loc_Availability.cs" />
     <Compile Include="Pages\ManageListing.cs" />
+    <Compile Include="Pages\ManageRequest.cs" />
+    <Compile Include="Pages\Notification.cs" />
+    <Compile Include="Pages\SearchByFilters.cs" />
+    <Compile Include="Pages\SearchSkill.cs" />
     <Compile Include="Pages\ShareSkill.cs" />
     <Compile Include="Pages\SignIn.cs" />
     <Compile Include="Pages\SignUp.cs" />
     <Compile Include="Pages\Profile.cs" />
+    <Compile Include="Pages\Skill.cs" />
+    <Compile Include="Test\CertificationTest.cs" />
+    <Compile Include="Test\Change_PasswordTest.cs" />
+    <Compile Include="Test\ChatTest.cs" />
+    <Compile Include="Test\DescriptionTest.cs" />
+    <Compile Include="Test\EducationTest.cs" />
+    <Compile Include="Test\LanguageTest.cs" />
+    <Compile Include="Test\Loc_AvailabilityTest.cs" />
     <Compile Include="Test\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\ManageListingTest.cs" />
+    <Compile Include="Test\ManageRequestTest.cs" />
+    <Compile Include="Test\NotificationTest.cs" />
+    <Compile Include="Test\SearchSkillTest.cs" />
+    <Compile Include="Test\ShareSkillTest.cs" />
+    <Compile Include="Test\SkillTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config\MarsResource.resx">

@@ -1,4 +1,5 @@
-﻿using MarsFramework.Global;
+﻿using MarsFramework.Config;
+using MarsFramework.Global;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -291,6 +292,24 @@ namespace MarsFramework.Pages
 
                 #endregion
 
+                //#region Add Work Sample
+
+
+                //try
+                //{
+                //    IWebElement upload = GlobalDefinitions.driver.FindElement(By.XPath("//input[@id='selectFile']"));
+                //    // Uploading File path
+                //    var SampleWorkPath = MarsResource.SampleWorkPath;
+                //    string fullPath = System.IO.Path.GetFullPath(SampleWorkPath);
+                //    upload.SendKeys(fullPath);
+                //}
+                //catch (Exception e)
+                //{
+                //    Assert.Fail("Failed to upload work sample", e.Message);
+                //}
+
+                //#endregion
+
                 #region Select User Status
                 //Select option Active or Hidden
                 if (GlobalDefinitions.ExcelLib.ReadData(2, "UserStatus") == "Active")
@@ -307,17 +326,7 @@ namespace MarsFramework.Pages
                 #endregion
 
 
-                #region Add Work Sample
-
-                ////Work Sample upload button path
-                //IWebElement upload = _driver.FindElement(By.XPath("//*[@id='selectFile']"));
-
-                //// Uploading File path
-                //var GetCurrentDirectory = Directory.GetCurrentDirectory();
-                //String path = GetCurrentDirectory + @"\MarsFramework\Upload Files\Samplework.txt";
-                //upload.SendKeys(path);
-
-                #endregion
+                
 
 
                 #region Save / Cancel Skill
@@ -325,6 +334,7 @@ namespace MarsFramework.Pages
 
                 if (Global.GlobalDefinitions.ExcelLib.ReadData(2, "SaveOrCancel") == "Save")
                 {
+                    GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//input[@value='Save']", 10000);
                     Save.Click();
                 }
                 else if (Global.GlobalDefinitions.ExcelLib.ReadData(2, "SaveOrCancel") == "Cancel")
@@ -352,10 +362,12 @@ namespace MarsFramework.Pages
             //Populate the excel data
 
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ShareSkill");
-            
+
             //Verify share skill details
+            
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id=\"listing-management-section\"]/div[2]/div[1]/div[2]/button[2]", 10000);
             ManageLis.Click();
+            GlobalDefinitions.driver.Navigate().Refresh();
             try
             {
                 GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, "XPath", "//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[2]", 10000);
