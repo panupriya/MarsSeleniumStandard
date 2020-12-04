@@ -157,11 +157,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]", 10000);
                 var lastRowEducationGraduationYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]")).Text;
                 Assert.That(lastRowEducationGraduationYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "YearOfGraduation")));
-                Base.test.Log(LogStatus.Info, "Education added verified successfully");
+                Base.test.Log(LogStatus.Pass, "Education added verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Education", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Education added is not verified successfully");
             }
 
         }
@@ -223,11 +224,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowEducationTitle = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowEducationTitle, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "Title")));
-                Base.test.Log(LogStatus.Info, "Education edited verified successfully");
+                Base.test.Log(LogStatus.Pass, "Education edited verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Updating Education", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Education edited is not verified successfully");
             }
 
         }
@@ -256,13 +258,14 @@ namespace MarsFramework.Pages
                 //Click on  delete education button
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[2]/i", 20000);
                 DeleteEduBtn.Click();
-                Base.test.Log(LogStatus.Info, "Education deleted successfully");
+                Base.test.Log(LogStatus.Pass, "Education deleted successfully");
 
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to delete Education", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Education is not deleted successfully");
             }
 
         }

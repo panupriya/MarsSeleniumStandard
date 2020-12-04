@@ -126,11 +126,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowSkillLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowSkillLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "SkillLevel")));
-                Base.test.Log(LogStatus.Info, "Added skill verified successfully");
+                Base.test.Log(LogStatus.Pass, "Added skill verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Skills", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Added skill is not verified successfully");
             }
         }
         #endregion
@@ -194,11 +195,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowSkillLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowSkillLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "SkillLevel")));
-                Base.test.Log(LogStatus.Info, "Skill edited verified successfully");
+                Base.test.Log(LogStatus.Pass, "Skill edited verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify updated Skills", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Skill edited is not verified successfully");
             }
         }
 
@@ -228,12 +230,13 @@ namespace MarsFramework.Pages
                 //Click on Delete skill
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
                 DeleteSkillBtn.Click();
-                Base.test.Log(LogStatus.Info, "Skill deleted successfully");
+                Base.test.Log(LogStatus.Pass, "Skill deleted successfully");
 
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to Delete Skill", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Skill is deleted successfully");
             }
         }
 

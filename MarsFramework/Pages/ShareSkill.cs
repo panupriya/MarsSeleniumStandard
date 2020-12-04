@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
+using System.Threading;
 
 namespace MarsFramework.Pages
 {
@@ -75,24 +76,79 @@ namespace MarsFramework.Pages
         //Storing the table of available days
         [FindsBy(How = How.XPath, Using = "//body/div/div/div[@id='service-listing-section']/div[@class='ui container']/div[@class='listing']/form[@class='ui form']/div[7]/div[2]/div[1]")]
         private IWebElement Days { get; set; }
+        
+        //Select days Mon
         [FindsBy(How = How.XPath, Using = "(//input[@name='Available'])[2]")]
-        private IWebElement Day { get; set; }
+        private IWebElement Mon { get; set; }
 
-        //Storing the starttime
+        //Select days Tuesday
+        [FindsBy(How = How.XPath, Using = "(//input[@name='Available'])[3]")]
+        private IWebElement Tue { get; set; }
+
+        //Select days Wednesday
+        [FindsBy(How = How.XPath, Using = "(//input[@name='Available'])[4]")]
+        private IWebElement Wed { get; set; }
+
+        //Select days Thursday
+        [FindsBy(How = How.XPath, Using = "(//input[@name='Available'])[5]")]
+        private IWebElement Thurs { get; set; }
+
+
+
+        //Storing the starttime from drop down
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[3]/div[2]/input")]
-        private IWebElement StartTime { get; set; }
+        private IWebElement StartTimeM { get; set; }
 
-        //Click on StartTime dropdown
         [FindsBy(How = How.XPath, Using = "(//input[@name='StartTime'])[2]")]
-        private IWebElement StartTimeDropDown { get; set; }
+        private IWebElement StartTimeDropDownM { get; set; }
 
-        //Storing the Endtime
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[2]/input")]
+        private IWebElement StartTimeT { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='StartTime'])[3]")]
+        private IWebElement StartTimeDropDownT { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[2]/input")]
+        private IWebElement StartTimeW { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='StartTime'])[4]")]
+        private IWebElement StartTimeDropDownW { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[2]/input")]
+        private IWebElement StartTimeTh { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='StartTime'])[5]")]
+        private IWebElement StartTimeDropDownTh { get; set; }
+
+
+
+
+        //Storing the Endtime from drop down
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[3]/div[3]/input")]
-        private IWebElement EndTime { get; set; }
-
-        //Click on EndtTime dropdown
+        private IWebElement EndTimeM { get; set; }
+       
         [FindsBy(How = How.XPath, Using = "(//input[@name='EndTime'])[2]")]
-        private IWebElement EndTimeDropDown { get; set; }
+        private IWebElement EndTimeDropDownM { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[3]/input")]
+        private IWebElement EndTimeT { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='EndTime'])[3]")]
+        private IWebElement EndTimeDropDownT { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[3]/input")]
+        private IWebElement EndTimeW { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='EndTime'])[4]")]
+        private IWebElement EndTimeDropDownW { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[3]/input")]
+        private IWebElement EndTimeTh { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//input[@name='EndTime'])[5]")]
+        private IWebElement EndTimeDropDownTh { get; set; }
+
+
 
         //Click on Skill Trade option
         [FindsBy(How = How.XPath, Using = "//form/div[8]/div[@class='twelve wide column']/div/div[@class = 'field']")]
@@ -233,29 +289,66 @@ namespace MarsFramework.Pages
                 EndDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Enddate"));
 
 
-                //Select available day
+                //Select available days
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//body/div/div/div[@id='service-listing-section']/div[@class='ui container']/div[@class='listing']/form[@class='ui form']/div[7]/div[2]/div[1]", 10000);
                 Days.Click();
-                Day.Click();
+                Mon.Click();
+                Tue.Click();
+                Wed.Click();
+                Thurs.Click();
 
-                //Select start time
+                //Select start time and enter the time
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[3]/div[2]/input", 10000);
-                StartTime.Click();
+                StartTimeM.Click();
+
+                StartTimeDropDownM.Click();
+                StartTimeDropDownM.SendKeys("09:00 AM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[2]/input", 10000);
+                StartTimeT.Click();
+
+                StartTimeDropDownT.Click();
+                StartTimeDropDownT.SendKeys("09:00 AM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[2]/input", 10000);
+                StartTimeW.Click();
+
+                StartTimeDropDownW.Click();
+                StartTimeDropDownW.SendKeys("09:00 AM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[2]/input", 10000);
+                StartTimeTh.Click();
+
+                StartTimeDropDownTh.Click();
+                StartTimeDropDownTh.SendKeys("09:00 AM");
 
 
-                //enter start time
-                StartTimeDropDown.Click();
-                //StartTimeDropDown.Clear();
-                StartTimeDropDown.SendKeys("09:00 AM");//(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime"));
 
-                //Select end time
+                //Select end time from box
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[3]/div[3]/input", 10000);
-                EndTime.Click();
+                EndTimeM.Click();
 
-                //Enter end time
-                EndTimeDropDown.Click();
-                //EndTimeDropDown.Clear();
-                EndTimeDropDown.SendKeys("05:00 PM");// (GlobalDefinitions.ExcelLib.ReadData(2, "Endtime"));
+                EndTimeDropDownM.Click();
+                EndTimeDropDownM.SendKeys("05:00 PM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[3]/input", 10000);
+                EndTimeT.Click();
+
+                EndTimeDropDownT.Click();
+                EndTimeDropDownT.SendKeys("05:00 PM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[3]/input", 10000);
+                EndTimeW.Click();
+
+                EndTimeDropDownW.Click();
+                EndTimeDropDownW.SendKeys("05:00 PM");
+
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[3]/input", 10000);
+                EndTimeTh.Click();
+
+                EndTimeDropDownTh.Click();
+                EndTimeDropDownTh.SendKeys("05:00 PM");
+                Thread.Sleep(1000);
                 #endregion
 
                 #region Select Skill Trade
@@ -292,7 +385,7 @@ namespace MarsFramework.Pages
 
                 #endregion
 
-                //#region Add Work Sample
+                #region Add Work Sample
 
 
                 //try
@@ -308,7 +401,7 @@ namespace MarsFramework.Pages
                 //    Assert.Fail("Failed to upload work sample", e.Message);
                 //}
 
-                //#endregion
+                #endregion
 
                 #region Select User Status
                 //Select option Active or Hidden
@@ -324,9 +417,6 @@ namespace MarsFramework.Pages
                     HiddenOpt.Click();
                 }
                 #endregion
-
-
-                
 
 
                 #region Save / Cancel Skill

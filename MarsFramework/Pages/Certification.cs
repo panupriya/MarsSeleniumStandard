@@ -76,7 +76,6 @@ namespace MarsFramework.Pages
         internal void EnterCertification()
         {
             //Populate the excel data
-
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
             // Refresh the page
             GlobalDefinitions.driver.Navigate().Refresh();
@@ -144,11 +143,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowCertificateYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowCertificateYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "YearOfCertification")));
-                Base.test.Log(LogStatus.Info, "Added Certification verified successfully");
+                Base.test.Log(LogStatus.Pass, "Added Certification verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Certification", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Added Certification is not verified successfully");
             }
 
         }
@@ -210,11 +210,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowCertificateYear = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowCertificateYear, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "YearOfCertification")));
-                Base.test.Log(LogStatus.Info, "Certification edited verified successfully");
+                Base.test.Log(LogStatus.Pass, "Certification edited verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Certification", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Certification edited is not verified successfully");
             }
 
 
@@ -247,13 +248,14 @@ namespace MarsFramework.Pages
                 //Click on delete certification button
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[4]/span[2]", 20000);
                 DeleteCertiBtn.Click();
-                Base.test.Log(LogStatus.Info, "Certification deleted successfully");
+                Base.test.Log(LogStatus.Pass, "Certification deleted successfully");
 
             }
 
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to delete Certification", ex.Message);
+                Base.test.Log(LogStatus.Pass, "Certification is not deleted successfully");
             }
         }
         #endregion

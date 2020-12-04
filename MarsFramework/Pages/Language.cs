@@ -118,11 +118,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowLanguageLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowLanguageLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(2, "LanguageLevel")));
-                Base.test.Log(LogStatus.Info, "Added Language verified successfully");
+                Base.test.Log(LogStatus.Pass, "Added Language verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to verify Entering Language", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Added Language is not verified successfully");
             }
 
         }
@@ -181,11 +182,12 @@ namespace MarsFramework.Pages
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowLanguageLevel = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowLanguageLevel, Is.EqualTo(GlobalDefinitions.ExcelLib.ReadData(3, "LanguageLevel")));
-                Base.test.Log(LogStatus.Info, "Language edited verified successfully");
+                Base.test.Log(LogStatus.Pass, "Language edited verified successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to update Language", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Language edited is not verified successfully");
             }
 
         }
@@ -216,11 +218,12 @@ namespace MarsFramework.Pages
                 //Click on delete language
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
                 DeleteLangBtn.Click();
-                Base.test.Log(LogStatus.Info, "Language deleted successfully");
+                Base.test.Log(LogStatus.Pass, "Language deleted successfully");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to delete Language", ex.Message);
+                Base.test.Log(LogStatus.Fail, "Language is not deleted successfully");
             }
 
         }

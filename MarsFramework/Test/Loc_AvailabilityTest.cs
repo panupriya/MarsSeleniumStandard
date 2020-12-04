@@ -12,7 +12,7 @@ namespace MarsFramework.Test
     {
 
         [TestFixture, Description("This fixture contains Mars Framework")]
-        [Category("Sprint1")]
+       
         class User : Global.Base
         {
             [Test, Description("Check if the user is able to add details successfully")]

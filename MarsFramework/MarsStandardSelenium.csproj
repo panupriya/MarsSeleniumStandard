@@ -140,7 +140,6 @@
     <Compile Include="Pages\ShareSkill.cs" />
     <Compile Include="Pages\SignIn.cs" />
     <Compile Include="Pages\SignUp.cs" />
-    <Compile Include="Pages\Profile.cs" />
     <Compile Include="Pages\Skill.cs" />
     <Compile Include="Test\CertificationTest.cs" />
     <Compile Include="Test\Change_PasswordTest.cs" />

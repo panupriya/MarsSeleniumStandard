@@ -33,6 +33,7 @@ namespace MarsFramework.Pages
 
         #endregion
 
+        #region Loginsteps
         internal void LoginSteps()
         {
             //Populate the excel data
@@ -70,6 +71,7 @@ namespace MarsFramework.Pages
 
 
         }
+        #endregion
 
     }
 }
