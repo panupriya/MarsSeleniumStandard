@@ -1,10 +1,13 @@
-﻿using MarsFramework.Config;
+﻿using AutoIt;
+using AutoItX3Lib;
+using MarsFramework.Config;
 using MarsFramework.Global;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
+using System.IO;
 using System.Threading;
 
 namespace MarsFramework.Pages
@@ -158,7 +161,7 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/div/div/div/input")]
         private IWebElement SkillExchange { get; set; }
 
-        //Select credit otion
+        //Select credit option
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[2]/div/div[2]/div/input")]
         private IWebElement CreditBtn { get; set; }
 
@@ -166,7 +169,9 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div/div/input")]
         private IWebElement CreditAmount { get; set; }
 
-
+        // Add Work Samples
+        [FindsBy(How = How.XPath, Using = "//i[@class='huge plus circle icon padding-25']")]
+        private IWebElement FileUpload { get; set; }
 
         //Click on Active/Hidden option
         [FindsBy(How = How.XPath, Using = "//form/div[10]/div[@class='twelve wide column']/div/div[@class = 'field']")]
@@ -302,25 +307,29 @@ namespace MarsFramework.Pages
                 StartTimeM.Click();
 
                 StartTimeDropDownM.Click();
-                StartTimeDropDownM.SendKeys("09:00 AM");
+                
+                StartTimeM.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[2]/input", 10000);
                 StartTimeT.Click();
 
                 StartTimeDropDownT.Click();
-                StartTimeDropDownT.SendKeys("09:00 AM");
+                
+                StartTimeT.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[2]/input", 10000);
                 StartTimeW.Click();
 
                 StartTimeDropDownW.Click();
-                StartTimeDropDownW.SendKeys("09:00 AM");
+               
+                StartTimeW.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[2]/input", 10000);
                 StartTimeTh.Click();
 
                 StartTimeDropDownTh.Click();
-                StartTimeDropDownTh.SendKeys("09:00 AM");
+                
+                StartTimeTh.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime")).ToString("hh:mmtt"));
 
 
 
@@ -329,25 +338,29 @@ namespace MarsFramework.Pages
                 EndTimeM.Click();
 
                 EndTimeDropDownM.Click();
-                EndTimeDropDownM.SendKeys("05:00 PM");
+               
+                EndTimeM.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[4]/div[3]/input", 10000);
                 EndTimeT.Click();
 
                 EndTimeDropDownT.Click();
-                EndTimeDropDownT.SendKeys("05:00 PM");
+                
+                EndTimeT.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[5]/div[3]/input", 10000);
                 EndTimeW.Click();
 
                 EndTimeDropDownW.Click();
-                EndTimeDropDownW.SendKeys("05:00 PM");
+                
+                EndTimeW.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime")).ToString("hh:mmtt"));
 
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[6]/div[3]/input", 10000);
                 EndTimeTh.Click();
 
                 EndTimeDropDownTh.Click();
-                EndTimeDropDownTh.SendKeys("05:00 PM");
+                
+                EndTimeTh.SendKeys(DateTime.Parse(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime")).ToString("hh:mmtt"));
                 Thread.Sleep(1000);
                 #endregion
 
@@ -388,18 +401,19 @@ namespace MarsFramework.Pages
                 #region Add Work Sample
 
 
-                //try
-                //{
-                //    IWebElement upload = GlobalDefinitions.driver.FindElement(By.XPath("//input[@id='selectFile']"));
-                //    // Uploading File path
-                //    var SampleWorkPath = MarsResource.SampleWorkPath;
-                //    string fullPath = System.IO.Path.GetFullPath(SampleWorkPath);
-                //    upload.SendKeys(fullPath);
-                //}
-                //catch (Exception e)
-                //{
-                //    Assert.Fail("Failed to upload work sample", e.Message);
-                //}
+                FileUpload.Click();
+               
+                AutoItX3 autoIt = new AutoItX3();
+                AutoItX.WinWait("Open", "File Upload", 1);
+                autoIt.WinActivate("Open");
+                Thread.Sleep(2000);
+                var SampleWorkPath = MarsResource.SampleWorkPath;
+                autoIt.Send(Path.GetFullPath(SampleWorkPath));
+                Thread.Sleep(2000);
+                autoIt.Send("{Enter}");
+                Thread.Sleep(2000);
+
+
 
                 #endregion
 

@@ -26,7 +26,19 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.LinkText, Using = "Received Requests")]
         private IWebElement ReceivedReqSel { get; set; }
 
-        
+        //Accept Request
+        [FindsBy(How = How.XPath, Using = "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button[1]")]
+        private IWebElement AcceptRequest { get; set; }
+
+        //Decline Request
+        [FindsBy(How = How.XPath, Using = "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button[2]")]
+        private IWebElement DeclineRequest { get; set; }
+
+        //Complete Request
+        [FindsBy(How = How.XPath, Using = "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button")]
+        private IWebElement CompleteRequest { get; set; }
+
+
 
         //Sent Request
         //Select Sent Request
@@ -45,8 +57,17 @@ namespace MarsFramework.Pages
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[text()='Manage Requests']", 10000);
             ManageReqTab.Click();
 
+            //Select Recieved Request
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "LinkText", "Received Requests", 10000);
             ReceivedReqSel.Click();
+
+            ////Accept request
+            //GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button[1]", 10000);
+            //AcceptRequest.Click();
+
+            //Complete request
+            GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[3]/td[8]/button", 10000);
+            CompleteRequest.Click();
         }
         #endregion
 
