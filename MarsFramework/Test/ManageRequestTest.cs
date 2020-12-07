@@ -30,6 +30,7 @@ namespace MarsFramework.Test
                 test = extent.StartTest("Sent Requests");
                 ManageRequest manageRequest = new ManageRequest();
                 manageRequest.SentRequests();
+                
 
             }
         }
