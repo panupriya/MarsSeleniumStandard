@@ -101,12 +101,12 @@ namespace MarsFramework.Pages
 
             //Accept or Declane request
 
-            if (GlobalDefinitions.ExcelLib.ReadData(2, "SentRequest") == "Accept")
+            if (GlobalDefinitions.ExcelLib.ReadData(2, "ReceviedRequest") == "Accept")
             {
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button[1]", 10000);
                 AcceptRequest.Click();
             }
-            else if (GlobalDefinitions.ExcelLib.ReadData(2, "SentRequest") == "Decline")
+            else if (GlobalDefinitions.ExcelLib.ReadData(2, "ReceviedRequest") == "Decline")
             {
                 GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[1]/td[8]/button[2]", 10000);
                 DeclineRequest.Click();
@@ -122,9 +122,9 @@ namespace MarsFramework.Pages
         #region Sent Request
         internal void SentRequests()
         {
-            ////Populate the excel data
+            //Populate the excel data
 
-            //GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ManageRequest");
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ManageRequest");
 
             //Click on manage request tab
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[text()='Manage Requests']", 10000);
@@ -139,8 +139,8 @@ namespace MarsFramework.Pages
             Thread.Sleep(1000);
             //Enter name
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-search-section']/div[2]/div/section/div/div[1]/div[3]/div[1]/div/div[1]/input", 10000);
-            //SearchNameicon.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "SearchName"));
-            SearchNameicon.SendKeys("kimi wang");
+            SearchNameicon.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "SearchName"));
+            //SearchNameicon.SendKeys("kimi wang");
             Thread.Sleep(1000);
 
             //Select name
@@ -153,8 +153,8 @@ namespace MarsFramework.Pages
 
             //Enter text data
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-detail-section']/div[2]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/textarea", 10000);
-            //SearchNameicon.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Text"));
-            textArea.SendKeys("I am interested on your skills");
+            SearchNameicon.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Text"));
+            //textArea.SendKeys("I am interested on your skills");
 
             //Click on request
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-detail-section']/div[2]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[3]", 10000);

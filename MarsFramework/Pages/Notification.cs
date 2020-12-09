@@ -27,7 +27,7 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.LinkText, Using = "See All...")]
         private IWebElement ClickSeeAll { get; set; }
 
-        //Click on select all
+        //Click on select all(Not working Xpath n Css Selector??)
         
         [FindsBy(How = How.XPath, Using = "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[1]/i")]
         private IWebElement SelectAll { get; set; }
@@ -65,7 +65,7 @@ namespace MarsFramework.Pages
            
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[1]/i", 10000);
             SelectAll.Click();
-            Thread.Sleep(1000);
+            
 
             //UnSelect All
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[2]", 10000);
@@ -82,6 +82,7 @@ namespace MarsFramework.Pages
             //Delete Notification
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[3]/i", 10000);
             Delete.Click();
+            Thread.Sleep(2000);
         }
         #endregion
     }

@@ -36,8 +36,8 @@ namespace MarsFramework.Pages
         #region Chat
         internal void Chats()
         {
-            ////Populate the Excel Sheet
-            //GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Chat");
+            //Populate the Excel Sheet
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Chat");
 
             //Click on Chat tab
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']/div/div[1]/div[2]/div/a[1]", 10000);
@@ -50,8 +50,8 @@ namespace MarsFramework.Pages
             //Select chat box to enter data
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='chatTextBox']", 10000);
             EnterChat.Click();
-            //EnterChat.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Message"));
-            EnterChat.SendKeys("Hi");
+            EnterChat.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Message"));
+            //EnterChat.SendKeys("Hi");
 
             //Click on Send tab
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='btnSend']", 10000);
