@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MarsFramework.Global;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
+using RelevantCodes.ExtentReports;
 
 namespace MarsFramework.Pages
 {
@@ -69,10 +70,12 @@ namespace MarsFramework.Pages
             // GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@data-tooltip='Select all']", 10000);
             SelectAll.Click();
             Thread.Sleep(1000);
+            Base.test.Log(LogStatus.Info, "Successfully selected all notifications");
 
             //UnSelect All
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[2]", 10000);
             UnSelectAll.Click();
+            Base.test.Log(LogStatus.Info, "Successfully Unselected all notifications");
 
             //Select one
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[3]/input", 10000);
@@ -86,6 +89,7 @@ namespace MarsFramework.Pages
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[3]/i", 10000);
             Delete.Click();
             Thread.Sleep(2000);
+            Base.test.Log(LogStatus.Info, "Delete notification successfull");
         }
         #endregion 
     }
