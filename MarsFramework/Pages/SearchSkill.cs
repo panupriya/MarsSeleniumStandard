@@ -1,5 +1,6 @@
 ﻿using MarsFramework.Global;
 using OpenQA.Selenium;
+using RelevantCodes.ExtentReports;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -82,6 +83,7 @@ namespace MarsFramework.Pages
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='service-search-section']/div[2]/div/section/div/div[1]/div[3]/div[1]/div/div[2]/div[1]/div/span", 10000);
             ClickSearchUser.Click();
             Thread.Sleep(2000);
+            Base.test.Log(LogStatus.Info, "Skill search is successfull");
         }
         #endregion
     }

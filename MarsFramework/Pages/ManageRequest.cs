@@ -115,7 +115,8 @@ namespace MarsFramework.Pages
 
             //Complete request
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='received-request-section']/div[2]/div[1]/table/tbody/tr[3]/td[8]/button", 10000);
-            CompleteRequest.Click(); 
+            CompleteRequest.Click();
+            Base.test.Log(LogStatus.Info, "Responded to received request successfully");
         }
         #endregion
 
@@ -164,6 +165,7 @@ namespace MarsFramework.Pages
             //select ok
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "/html/body/div[4]/div/div[3]/button[1]", 10000);
             Yes.Click();
+            Base.test.Log(LogStatus.Info, "Request sent successfully");
 
         }
         #endregion

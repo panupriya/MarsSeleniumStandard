@@ -1,5 +1,6 @@
 ﻿using MarsFramework.Global;
 using OpenQA.Selenium;
+using RelevantCodes.ExtentReports;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace MarsFramework.Pages
             //Click on Send tab
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='btnSend']", 10000);
             clickSend.Click();
+            Base.test.Log(LogStatus.Info, "Chat message sent successfully");
         }
         #endregion
     }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MarsFramework.Global;
 using System.Threading;
+using OpenQA.Selenium.Interactions;
 
 namespace MarsFramework.Pages
 {
@@ -27,9 +28,9 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.LinkText, Using = "See All...")]
         private IWebElement ClickSeeAll { get; set; }
 
-        //Click on select all(Not working Xpath n Css Selector??)
+        //Click on select all
         
-        [FindsBy(How = How.XPath, Using = "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[1]/i")]
+        [FindsBy(How = How.XPath, Using = "//div[@data-tooltip='Select all']")]
         private IWebElement SelectAll { get; set; }
 
 
@@ -62,10 +63,12 @@ namespace MarsFramework.Pages
             ClickSeeAll.Click();
 
             //Click on select all
-           
-            GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[1]/i", 10000);
+            // Wait 
+            GlobalDefinitions.WaitForElementClickable(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']//" +
+                "div[last()-1]/div/div/div[3]/input", 1000);
+            // GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//div[@data-tooltip='Select all']", 10000);
             SelectAll.Click();
-            
+            Thread.Sleep(1000);
 
             //UnSelect All
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "//*[@id='notification-section']/div[2]/div/div/div[3]/div[1]/div[2]", 10000);

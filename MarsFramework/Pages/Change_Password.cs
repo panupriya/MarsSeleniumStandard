@@ -1,5 +1,6 @@
 ﻿using MarsFramework.Global;
 using OpenQA.Selenium;
+using RelevantCodes.ExtentReports;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -72,11 +73,17 @@ namespace MarsFramework.Pages
             GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "/html/body/div[4]/div/div[2]/form/div[3]/input", 10000);
             ConfirmNewPwd.Click();
             ConfirmNewPwd.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "NewPassword"));
-
-            //Click on save button
-            GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "/html/body/div[4]/div/div[2]/form/div[4]/button", 10000);
-            SaveBtn.Click();
-
+            try
+            {
+                //Click on save button
+                GlobalDefinitions.WaitForElementVisibility(GlobalDefinitions.driver, "XPath", "/html/body/div[4]/div/div[2]/form/div[4]/button", 10000);
+                SaveBtn.Click();
+                Base.test.Log(LogStatus.Pass, "Password changed successfully");
+            }
+            catch
+            {
+                Base.test.Log(LogStatus.Fail, "Password is not reset successfully");
+            }
         }
         #endregion
 

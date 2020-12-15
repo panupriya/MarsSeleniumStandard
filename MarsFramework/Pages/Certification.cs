@@ -255,7 +255,7 @@ namespace MarsFramework.Pages
             catch (Exception ex)
             {
                 Assert.Fail("Test failed to delete Certification", ex.Message);
-                Base.test.Log(LogStatus.Pass, "Certification is not deleted successfully");
+                Base.test.Log(LogStatus.Fail, "Certification is not deleted successfully");
             }
         }
         #endregion
